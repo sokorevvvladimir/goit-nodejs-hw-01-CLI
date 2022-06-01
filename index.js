@@ -23,16 +23,23 @@ const invokeAction = async({ action, id, name, email, phone }) => {
     case "get":
           const contact = await contacts.getContactById(id);
           console.log(contact);
+          if (contact === null) {
+              throw new Error(`No contact with id-${id} in the database!`);
+          }
       break;
 
     case "add":
          const newContact = await contacts.addContact(name, email, phone);
           console.log(newContact);
+          
       break;
 
     case "remove":
           const contactToRemove = await contacts.removeContact(id);
           console.log(contactToRemove);
+          if (contactToRemove === null) {
+              throw new Error(`No contact with id-${id} in the database!`);
+          };
       break;
 
     default:
